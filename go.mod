@@ -1,4 +1,4 @@
-module github.com/shamxl/wa-noise
+module github.com/shamxl/waNoise
 
 go 1.23.5
 

@@ -58,6 +58,12 @@ func (nh *NoiseHandler) Decrypt (ciphertext []byte) ([]byte, error) {
   return dec, err
 }
 
+func (nh *NoiseHandler) Encrypt (plaintext []byte) []byte {
+  ciphertext := nh.key.Seal(nil, generateIV(nh.PostIncrementCounter()), plaintext, nh.hash)
+  nh.Authenticate(ciphertext)
+  return ciphertext
+}
+
 func (nh *NoiseHandler) StartHandshake () {
   mode := []byte(NOISE_MODE)
   if len(mode) == 32 {
